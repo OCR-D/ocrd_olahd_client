@@ -1,0 +1,40 @@
+{
+  "version": "0.0.1",
+  "git_url": "https://github.com/OCR-D/ocrd_olahd_client",
+  "tools": {
+    "ocrd-olahd-client": {
+      "executable": "ocrd-olahd-client",
+      "description": "Post a workspace to OLA-HD",
+      "categories": [
+        "Image preprocessing"
+      ],
+      "steps": [
+        "preprocessing/optimization"
+      ],
+      "input_file_grp": [],
+      "output_file_grp": [],
+      "parameters": {
+        "endpoint": {
+          "description": "URL of the OLA-HD instance",
+          "type": "string",
+          "required": true
+        },
+        "strict": {
+          "description": "Whether to log or raise bagging issues",
+          "type": "boolean",
+          "default": true
+        },
+        "username": {
+          "description": "Username",
+          "type": "string",
+          "required": true
+        },
+        "password": {
+          "description": "Pasword",
+          "type": "string",
+          "required": true
+        }
+      }
+    }
+  }
+}
