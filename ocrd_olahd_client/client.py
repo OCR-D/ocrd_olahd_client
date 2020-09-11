@@ -28,8 +28,8 @@ class OlaHdClient():
     def post(self, bag_fpath, prev_pid=None):
         if not self.is_logged_in():
             raise Exception("Not logged in")
-        # fields={'file': ('file', open(bag_fpath, 'rb'), 'application/vnd.ocrd+zip')}
-        fields={'file': ('file', open(bag_fpath, 'rb'))}
+        fields={'file': ('file.zip', open(bag_fpath, 'rb'), 'application/vnd.ocrd+zip')}
+        # fields={'file': ('file.zip', open(bag_fpath, 'rb'))}
         if prev_pid:
             fields['prev'] = prev_pid
         m = MultipartEncoder(fields)

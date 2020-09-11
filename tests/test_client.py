@@ -53,7 +53,8 @@ def test_login(client):
 def test_post(client, kant_ocrdzip, ocrd_identifier):
     client.login()
     # client.post('bar', ocrd_identifier)
-    client.post(kant_ocrdzip)
+    print(client.post(kant_ocrdzip))
+    assert 0
 
 if __name__ == '__main__':
     main([__file__])
