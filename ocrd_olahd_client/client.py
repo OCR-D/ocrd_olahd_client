@@ -1,3 +1,4 @@
+from requests_toolbelt.multipart.encoder import MultipartEncoder
 from requests import post
 
 class OlaHdClient():
@@ -12,18 +13,31 @@ class OlaHdClient():
         return self.token is not None
 
     def login(self):
-        r = post('%s/login' % self.endpoint, files={
-            'password': ('password', self.password),
-            'username': ('username', self.username),
+        m = MultipartEncoder(fields={
+            'password': self.password,
+            'username': self.username,
+        })
+        r = post('%s/login' % self.endpoint, data=m, headers={
+            'Accept': 'application/json',
+            'Content-Type': m.content_type,
         })
         if r.status_code != 200:
             r.raise_for_status()
-        self.token = r.text
+        self.token = r.json()['accessToken']
 
-    def post_bag(self, bag_fpath, prev_pid=None):
+    def post(self, bag_fpath, prev_pid=None):
         if not self.is_logged_in():
             raise Exception("Not logged in")
-        files = {'file': ('file', bag_fpath)}
+        # fields={'file': ('file', open(bag_fpath, 'rb'), 'application/vnd.ocrd+zip')}
+        fields={'file': ('file', open(bag_fpath, 'rb'))}
         if prev_pid:
-            files['prev'] = ('prev', prev_pid)
-        return post('%s/bag' % self.endpoint, files)
+            fields['prev'] = prev_pid
+        m = MultipartEncoder(fields)
+        r = post('%s/bag' % self.endpoint, data=m, headers={
+            'Authorization': 'Bearer %s' % self.token,
+            # 'Accept': 'application/json',
+            'Content-Type': m.content_type,
+        })
+        if r.status_code >= 400:
+            r.raise_for_status()
+        return r.json()

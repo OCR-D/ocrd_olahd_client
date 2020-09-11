@@ -52,9 +52,14 @@ docker:
 	docker build -t $(DOCKER_TAG) .
 
 # Run unit tests
-test: test/assets
+test: tests/assets
 	# declare -p HTTP_PROXY
 	$(PYTHON) -m pytest --continue-on-collection-errors tests $(PYTEST_ARGS)
+
+.PHONY: tests/assets
+tests/assets:
+	mkdir -p tests/assets
+	cp -r repo/assets/data/* tests/assets
 
 # Run unit tests and determine test coverage
 coverage:

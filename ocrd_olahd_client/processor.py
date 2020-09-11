@@ -24,7 +24,7 @@ class OlaHdClientProcessor(Processor):
         client = OlaHdClient(self.parameter['endpoint'], self.parameter['username'], self.parameter['password'])
         bagger = WorkspaceBagger(Resolver(), strict=True)
         # TODO
-        dest = join(gettempdir(), 'bag-%d.zip' % int(round((time() * 1000))))
+        dest = join(gettempdir(), 'bag-%d.ocrd.zip' % int(round((time() * 1000))))
         # TODO
         ocrd_identifier = self.workspace.mets.unique_identifier
         bagger.bag(self.workspace, ocrd_identifier, dest=dest)
