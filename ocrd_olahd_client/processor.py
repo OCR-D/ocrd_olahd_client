@@ -29,4 +29,4 @@ class OlaHdClientProcessor(Processor):
         ocrd_identifier = self.workspace.mets.unique_identifier
         bagger.bag(self.workspace, ocrd_identifier, dest=dest)
         client.login()
-        client.post_bag(dest, prev_pid=ocrd_identifier)
+        client.post(dest, prev_pid=ocrd_identifier)
