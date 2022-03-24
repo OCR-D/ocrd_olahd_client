@@ -2,3 +2,4 @@
 __pycache__
 params.json
 tests/assets
+/build
