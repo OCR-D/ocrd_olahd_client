@@ -30,7 +30,7 @@
           "required": true
         },
         "password": {
-          "description": "Pasword",
+          "description": "Password",
           "type": "string",
           "required": true
         }
