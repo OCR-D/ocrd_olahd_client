@@ -33,6 +33,11 @@
           "description": "Password",
           "type": "string",
           "required": true
+        },
+        "pid_previous_version": {
+          "description": "PID of the previous version of this work, already stored in OLA-HD",
+          "type": "string",
+          "required": false
         }
       }
     }

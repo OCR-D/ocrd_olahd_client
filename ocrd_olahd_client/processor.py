@@ -35,5 +35,6 @@ class OlaHdClientProcessor(Processor):
         LOG.debug('Logging in')
         client.login()
         LOG.debug('POST bag')
-        client.post(dest, prev_pid=ocrd_identifier)
+        prev_pid = self.parameter.get('pid_previous_version', None)
+        client.post(dest, prev_pid=prev_pid)
         LOG.info('finished POST bag')
