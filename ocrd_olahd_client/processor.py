@@ -30,10 +30,10 @@ class OlaHdClientProcessor(Processor):
         dest = join(gettempdir(), 'bag-%d.ocrd.zip' % int(round((time() * 1000))))
         # TODO
         ocrd_identifier = self.workspace.mets.unique_identifier
-        LOG.info('Bagging workspace')
+        LOG.debug('Bagging workspace')
         bagger.bag(self.workspace, ocrd_identifier, dest=dest)
-        LOG.info('Logging in')
+        LOG.debug('Logging in')
         client.login()
-        LOG.info('POST bag')
+        LOG.debug('POST bag')
         client.post(dest, prev_pid=ocrd_identifier)
         LOG.info('finished POST bag')
