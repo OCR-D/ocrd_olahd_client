@@ -6,4 +6,6 @@ from .processor import OlaHdClientProcessor
 @click.command()
 @ocrd_cli_options
 def cli(*args, **kwargs):
+    if kwargs['input_file_grp'] == 'INPUT':
+        kwargs['input_file_grp'] = ''
     return ocrd_cli_wrap_processor(OlaHdClientProcessor, *args, **kwargs)
