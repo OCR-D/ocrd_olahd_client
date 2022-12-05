@@ -36,5 +36,6 @@ class OlaHdClientProcessor(Processor):
         client.login()
         LOG.debug('POST bag')
         prev_pid = self.parameter.get('pid_previous_version', None)
-        client.post(dest, prev_pid=prev_pid)
+        pid = client.post(dest, prev_pid=prev_pid)
+        print(f"PID of uploaded workspace: {pid}")
         LOG.info('finished POST bag')
