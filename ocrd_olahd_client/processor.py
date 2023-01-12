@@ -14,6 +14,7 @@ from .client import OlaHdClient
 OCRD_TOOL = json.loads(resource_string(__name__, 'ocrd-tool.json').decode('utf8'))
 TOOL = 'ocrd-olahd-client'
 
+
 class OlaHdClientProcessor(Processor):
 
     def __init__(self, *args, **kwargs):
@@ -24,7 +25,8 @@ class OlaHdClientProcessor(Processor):
     def process(self):
         LOG = getLogger('processor.OlaHdClientProcessor')
         LOG.info('Posting workspace to %s' % self.parameter['endpoint'])
-        client = OlaHdClient(self.parameter['endpoint'], self.parameter['username'], self.parameter['password'])
+        client = OlaHdClient(self.parameter['endpoint'], self.parameter['username'],
+                             self.parameter['password'])
         bagger = WorkspaceBagger(Resolver(), strict=True)
         # TODO
         dest = join(gettempdir(), 'bag-%d.ocrd.zip' % int(round((time() * 1000))))
@@ -38,3 +40,7 @@ class OlaHdClientProcessor(Processor):
         prev_pid = self.parameter.get('pid_previous_version', None)
         pid = client.post(dest, prev_pid=prev_pid)
         LOG.info(f"finished POST bag. Received PID: {pid}")
+        if "password" in self.parameter:
+            self.parameter["password"] = "*****"
+        if pid:
+            self.parameter["result_pid"] = pid
