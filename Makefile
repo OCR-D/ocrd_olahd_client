@@ -47,6 +47,11 @@ install:
 	$(PIP) install -U pip
 	$(PIP) install .
 
+# Install-develop
+install-dev:
+	$(PIP) install -U pip
+	$(PIP) install -e .
+
 # Build docker image
 docker:
 	docker build -t $(DOCKER_TAG) .
