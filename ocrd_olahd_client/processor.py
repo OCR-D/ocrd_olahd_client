@@ -43,4 +43,4 @@ class OlaHdClientProcessor(Processor):
         if "password" in self.parameter:
             self.parameter["password"] = "*****"
         if pid:
-            self.parameter["result_pid"] = pid
+            self.parameter["pid_previous_version"] = pid
