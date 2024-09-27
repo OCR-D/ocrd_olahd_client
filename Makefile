@@ -1,5 +1,3 @@
-export
-
 SHELL = /bin/bash
 PYTHON = python3
 PIP = pip3
@@ -54,7 +52,10 @@ install-dev:
 
 # Build docker image
 docker:
-	docker build -t $(DOCKER_TAG) .
+	docker build \
+	--build-arg VCS_REF=$(shell git rev-parse --short HEAD) \
+	--build-arg BUILD_DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ") \
+	-t $(DOCKER_TAG) .
 
 # Run unit tests
 test: tests/assets
