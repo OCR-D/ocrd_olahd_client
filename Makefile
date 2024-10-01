@@ -1,5 +1,3 @@
-export
-
 SHELL = /bin/bash
 PYTHON = python3
 PIP = pip3
@@ -9,7 +7,7 @@ PYTHONIOENCODING=utf8
 # pytest args. Set to '-s' to see log output during test execution, '--verbose' to see individual tests. Default: '$(PYTEST_ARGS)'
 PYTEST_ARGS =
 
-# Docker container tag
+DOCKER_BASE_IMAGE = docker.io/ocrd/core:v2.68.0
 DOCKER_TAG = 'ocrd/olahd-client'
 
 # BEGIN-EVAL makefile-parser --make-help Makefile
@@ -52,9 +50,12 @@ install-dev:
 	$(PIP) install -U pip
 	$(PIP) install -e .
 
-# Build docker image
 docker:
-	docker build -t $(DOCKER_TAG) .
+	docker build \
+	--build-arg DOCKER_BASE_IMAGE=$(DOCKER_BASE_IMAGE) \
+	--build-arg VCS_REF=$$(git rev-parse --short HEAD) \
+	--build-arg BUILD_DATE=$$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+	-t $(DOCKER_TAG) .
 
 # Run unit tests
 test: tests/assets
@@ -73,4 +74,4 @@ coverage:
 	coverage report
 	coverage html
 
-.PHONY: test install deps deps-test help
+.PHONY: test install deps deps-test help docker
