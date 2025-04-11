@@ -1,4 +1,3 @@
-ocrd >= 2.16.1
+ocrd >= 3.3.0
 requests >= 2.24.0
-setuptools >= 50
 requests-toolbelt >= 0.9.1

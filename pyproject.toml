@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel", "setuptools-ocrd"]
+
+[project]
+name = "ocrd_olahd_client"
+authors = [{name = "Konstantin Baierer"}, {name = "Jonas Schrewe"}]
+license.text = "Apache-2.0"
+description = "OCR-D processor and client for OLA-HD"
+requires-python = ">=3.8"
+dynamic = ["version", "dependencies"]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+optional-dependencies.test = {file = ["requirements_test.txt"]}
+
+[project.urls]
+Repository = "https://github.com/OCR-D/ocrd_olahd_client"
+
+[project.scripts]
+ocrd-olahd-client = "ocrd_olahd_client.cli:cli"
+
+[tool.setuptools.package-data]
+"*" = ["*.json"]

@@ -1,8 +1,11 @@
 {
   "version": "0.0.2",
   "git_url": "https://github.com/OCR-D/ocrd_olahd_client",
+  "dockerhub": "ocrd/olahd-client",
   "tools": {
     "ocrd-olahd-client": {
+      "input_file_grp_cardinality": 0,
+      "output_file_grp_cardinality": 0,
       "executable": "ocrd-olahd-client",
       "description": "Post a workspace to OLA-HD",
       "categories": [
