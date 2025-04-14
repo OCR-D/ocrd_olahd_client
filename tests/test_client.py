@@ -2,37 +2,42 @@ from json import loads
 from os import unlink
 from os.path import join
 from time import time
-from tempfile import gettempdir, NamedTemporaryFile
+from tempfile import gettempdir
 
-from pytest import main, fixture, skip
+from pytest import main, fixture
 from ocrd import Resolver
 from ocrd.workspace_bagger import WorkspaceBagger
 from ocrd_olahd_client import OlaHdClient
 
 from tests.assets import assets
 
-DEBUG_HTTP = 1
+DEBUG_HTTP = 0
 if DEBUG_HTTP:
     from http.client import HTTPConnection
     import logging
     HTTPConnection.debuglevel = 1
-    logging.basicConfig() # you need to initialize logging, otherwise you will not see anything from requests
+    # you need to initialize logging, otherwise you will not see anything from requests
+    logging.basicConfig()
     logging.getLogger().setLevel(logging.DEBUG)
     requests_log = logging.getLogger("urllib3")
     requests_log.setLevel(logging.DEBUG)
     requests_log.propagate = True
 
+
 @fixture
 def params():
     return loads(open('params.json').read())
+
 
 @fixture
 def client(params):
     return OlaHdClient(**params)
 
+
 @fixture
 def ocrd_identifier():
     return 'urn:test:import:kant'
+
 
 @fixture
 def kant_ocrdzip(ocrd_identifier):
@@ -44,17 +49,19 @@ def kant_ocrdzip(ocrd_identifier):
     yield dest
     unlink(dest)
 
+
 def test_login(client):
-    skip("temporary")
     assert client.token is None
     client.login()
     assert client.token
 
+
 def test_post(client, kant_ocrdzip, ocrd_identifier):
     client.login()
-    # client.post('bar', ocrd_identifier)
-    print(client.post(kant_ocrdzip))
-    assert 0
+    pid = client.post(kant_ocrdzip)
+    print(f"Uploaded ocrd-zip: {pid}")
+    assert pid, "Import failed, no pid received"
+
 
 if __name__ == '__main__':
     main([__file__])

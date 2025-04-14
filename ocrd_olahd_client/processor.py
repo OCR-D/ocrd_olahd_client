@@ -21,9 +21,7 @@ class OlaHdClientProcessor(Processor):
         client = OlaHdClient(self.parameter['endpoint'], self.parameter['username'],
                              self.parameter['password'])
         bagger = WorkspaceBagger(Resolver(), strict=True)
-        # TODO
         dest = join(gettempdir(), 'bag-%d.ocrd.zip' % int(round((time() * 1000))))
-        # TODO
         ocrd_identifier = workspace.mets.unique_identifier
         self.logger.debug('Bagging workspace')
         bagger.bag(workspace, ocrd_identifier, dest=dest)
@@ -33,8 +31,3 @@ class OlaHdClientProcessor(Processor):
         prev_pid = self.parameter.get('pid_previous_version', None)
         pid = client.post(dest, prev_pid=prev_pid)
         self.logger.info(f"finished POST bag. Received PID: {pid}")
-        # TODO: what's the purpose of this?
-        if "password" in self.parameter:
-            self.parameter["password"] = "*****"
-        if pid:
-            self.parameter["pid_previous_version"] = pid

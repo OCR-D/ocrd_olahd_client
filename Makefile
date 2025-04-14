@@ -7,7 +7,7 @@ PYTHONIOENCODING=utf8
 # pytest args. Set to '-s' to see log output during test execution, '--verbose' to see individual tests. Default: '$(PYTEST_ARGS)'
 PYTEST_ARGS =
 
-DOCKER_BASE_IMAGE = docker.io/ocrd/core:v2.68.0
+DOCKER_BASE_IMAGE = docker.io/ocrd/core:v3.3.0
 DOCKER_TAG = 'ocrd/olahd-client'
 
 # BEGIN-EVAL makefile-parser --make-help Makefile
