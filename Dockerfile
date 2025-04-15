@@ -9,7 +9,7 @@ LABEL \
     org.label-schema.build-date=$BUILD_DATE \
     org.opencontainers.image.vendor="DFG-Funded Initiative for Optical Character Recognition Development" \
     org.opencontainers.image.title="ocrd_olahd_client" \
-    org.opencontainers.image.description="Client for OLA-HD" \
+    org.opencontainers.image.description="Client for OLA-HD archiving and preservation" \
     org.opencontainers.image.source="https://github.com/OCR-D/ocrd_olahd_client" \
     org.opencontainers.image.documentation="https://github.com/OCR-D/ocrd_olahd_client/blob/${VCS_REF}/README.md" \
     org.opencontainers.image.revision=$VCS_REF \
