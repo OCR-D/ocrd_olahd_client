@@ -60,7 +60,7 @@ docker:
 # Run unit tests
 test: tests/assets
 	# declare -p HTTP_PROXY
-	$(PYTHON) -m pytest --continue-on-collection-errors tests $(PYTEST_ARGS)
+	$(PYTHON) -m pytest -s --continue-on-collection-errors tests $(PYTEST_ARGS)
 
 .PHONY: tests/assets
 tests/assets:
