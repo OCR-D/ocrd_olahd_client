@@ -7,8 +7,9 @@ PYTHONIOENCODING=utf8
 # pytest args. Set to '-s' to see log output during test execution, '--verbose' to see individual tests. Default: '$(PYTEST_ARGS)'
 PYTEST_ARGS =
 
-DOCKER_BASE_IMAGE = docker.io/ocrd/core:v3.3.0
-DOCKER_TAG = 'ocrd/olahd-client'
+DOCKER_BASE_IMAGE ?= docker.io/ocrd/core:latest
+DOCKER_TAG ?= 'ocrd/olahd-client'
+DOCKER ?= docker
 
 # BEGIN-EVAL makefile-parser --make-help Makefile
 
@@ -51,7 +52,7 @@ install-dev:
 	$(PIP) install -e .
 
 docker:
-	docker build \
+	$(DOCKER) build \
 	--build-arg DOCKER_BASE_IMAGE=$(DOCKER_BASE_IMAGE) \
 	--build-arg VCS_REF=$$(git rev-parse --short HEAD) \
 	--build-arg BUILD_DATE=$$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
