@@ -7,6 +7,12 @@ Versioned according to [Semantic Versioning](http://semver.org/).
 
 Changed:
 
+  * `make docker`: Overrideable `$(DOCKER)` command and base on `latest` OCR-D/core, #16
+
+## [1.0.0] - 2023-04-16
+
+Changed:
+
   * Updated to OCR-D v3 API, #12
 
 
